@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -77,6 +78,8 @@ def logar(request):
 def sair(request):
     logout(request)
     return render(request, 'index.html')
+
+
 
 
     
