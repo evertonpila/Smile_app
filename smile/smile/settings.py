@@ -10,6 +10,11 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import psycopg2
+from psycopg2 import pool, sql
+from dotenv import load_dotenv
+from typing import Optional
+load_dotenv()
 
 import os
 from pathlib import Path
@@ -40,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
-]
+    'sinais'
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,10 +83,17 @@ WSGI_APPLICATION = 'smile.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("DB_NAME"),       # Nome do banco de dados
+        'USER': os.getenv("USER"),              # Usuário do PostgreSQL
+        'PASSWORD': os.getenv("PASSWORD"),            # Senha do usuário
+        'HOST': os.getenv("HOST"),                # Endereço do servidor (ou IP)
+        'PORT': os.getenv("PORT"),                     # Porta do PostgreSQL (padrão é 5432)
+        "minconn":1,
+        "maxconn":20
     }
 }
 
