@@ -1,0 +1,112 @@
+:root {
+    --gold: #D4A31F;
+    --dark-bg: #0e0e0e;
+    --card-bg: #1a1a1a;
+    --text-light: #f5f5f5;
+    --text-muted: #b3b3b3;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid rgba(212, 163, 31, 0.3);
+}
+
+.navbar .nav-link {
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+.navbar .nav-link:hover {
+    color: var(--gold);
+}
+
+/* Header */
+.dashboard-header {
+    text-align: center;
+    margin: 2rem 0;
+}
+.dashboard-header h1 {
+    color: var(--gold);
+    font-weight: bold;
+}
+.dashboard-header p {
+    color: var(--text-muted);
+}
+
+/* Cards */
+.stat-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgba(212, 163, 31, 0.2);
+    transition: transform 0.2s ease;
+}
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card h3 {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+}
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+/* Tabelas */
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(212, 163, 31, 0.2);
+}
+
+.card-header {
+    background: transparent;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.table {
+    color: var(--text-light);
+}
+.table thead {
+    color: var(--gold);
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(212, 163, 31, 0.1);
+}
+
+.positive {
+    color: var(--success);
+    font-weight: bold;
+}
+.negative {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+/* Botão estilo premium */
+.btn-outline-primary {
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    transition: 0.3s ease;
+}
+.btn-outline-primary:hover {
+    background-color: var(--gold);
+    color: var(--dark-bg);
+}

@@ -23,6 +23,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('usuarios.urls')),
-    path('home/', views.home, name='home') # Página principal
+    path('compra/', include('sinais.urls')),
     
 ]

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Conta</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #D4A31F;
+      margin-bottom: 30px;
+    }
+
+    .card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    .card h3 {
+      color: #D4A31F;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #f1f1f1;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #2a2a2a;
+      color: #fff;
+    }
+
+    input:focus {
+      border-color: #D4A31F;
+      outline: none;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      background: #D4A31F;
+      color: #121212;
+    }
+
+    .btn-secondary {
+      background: #333;
+      color: #fff;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .navbar {
+      background-color: var(--foreground);
+      border-bottom: 1px solid rgba(212, 163, 31, 0.2);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar a {
+      color: var(--secondary-foreground);
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+    .navbar a:hover {
+      color: var(--primary);
+    }
+    .smile {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+
+    }
+  </style>
+</head>
+<body>
+      <nav class="navbar">
+    <a href="{% url 'home' %}" class="smile">Smile</a>
+    <div>
+      <a class="nav-link" href="{% url 'dashboard' %}">Seus investimento</a>
+      <a class="nav-link" href="{% url 'chave' %}">API</a>
+      <a class="nav-link" href="{% url 'editar_conta' %}" >Editar Conta</a>
+    </div>
+  </nav>
+  <div class="container">
+    <h2>Editar Conta</h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="card">
+        <h3>Informações do Usuário</h3>
+        <div class="form-group">
+          {{ user_form.username.label_tag }}
+          {{ user_form.username }}
+        </div>
+        <div class="form-group">
+          {{ user_form.email.label_tag }}
+          {{ user_form.email }}
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Credenciais API</h3>
+        <div class="form-group">
+          {{ cred_form.chave_api.label_tag }}
+          {{ cred_form.chave_api }}
+        </div>
+        <div class="form-group">
+          {{ cred_form.chave_secreta.label_tag }}
+          {{ cred_form.chave_secreta }}
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

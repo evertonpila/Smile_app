@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #0d0d0d;
+      --foreground: #1a1a1a;
+      --primary: #D4A31F; /* dourado da logo */
+      --primary-foreground: #0d0d0d;
+      --secondary: #2a2a2a;
+      --secondary-foreground: #f9fafb;
+      --muted-foreground: #a1a1aa;
+      --accent: #f3f4f6;
+      --destructive: #C62828;
+      --success: #2E7D32;
+      --border: #333;
+      --ring: #D4A31F;
+      --gradient-gold: linear-gradient(90deg, #d4a31f, #b3a925);
+    }
+
+    body {
+      background: var(--background);
+      color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* --- Navbar --- */
+    .navbar {
+      background-color: var(--foreground);
+      border-bottom: 1px solid rgba(212, 163, 31, 0.2);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar a {
+      color: var(--secondary-foreground);
+      text-decoration: none;
+      font-weight: 600;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+    .navbar a:hover {
+      color: var(--primary);
+    }
+    .smile {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+
+    }
+    .btn {
+      border: 1px solid var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      color: var(--primary);
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+
+    /* --- Container --- */
+    .container {
+      max-width: 500px;
+      margin: 4rem auto;
+      background: var(--foreground);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 15px rgba(212,163,31,0.2);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    /* --- Formulário --- */
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .form-header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 0;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .input-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .input-box label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted-foreground);
+    }
+    .input-box input {
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: #0f0f0f;
+      color: var(--accent);
+      font-size: 1rem;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+    .input-box input:focus {
+      outline: none;
+      border-color: var(--ring);
+      box-shadow: 0 0 0 3px rgba(212, 163, 31, 0.2);
+    }
+
+    /* --- Botão --- */
+    .salvar {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.9rem;
+      border: none;
+      border-radius: 0.6rem;
+      background: var(--gradient-gold);
+      color: var(--primary-foreground);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .salvar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(212, 163, 31, 0.3);
+    }
+
+    /* --- Mensagens --- */
+    .mensagem {
+      margin-bottom: 1rem;
+    }
+    .alert {
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      text-align: center;
+      margin-bottom: 0.8rem;
+    }
+    .alert.success {
+      background: rgba(46, 125, 50, 0.15);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .alert.error {
+      background: rgba(198, 40, 40, 0.15);
+      color: var(--destructive);
+      border: 1px solid var(--destructive);
+    }
+
+    /* --- Animação --- */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="{% url 'home' %}" class="smile">Smile</a>
+    <div>
+      <a class="nav-link" href="{% url 'dashboard' %}">Seus investimento</a>
+      <a class="nav-link" href="{% url 'editar_conta' %}">Editar Conta</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="mensagem">  
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {{message.tags}}">{{message}}</div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <form action="#" method="POST">
+      {% csrf_token %}
+      <div class="form-header">
+        <h1>Coloque Sua API</h1>
+      </div>
+
+      <div class="input-group">
+
+        <div class="input-box">
+            <label for="apiKey">Chave API</label>
+            <input type="text" id="apiKey" placeholder="Digite sua chave..." name="chave_api">
+        </div>
+
+        <div class="input-box">
+            <label for="apiSecret">Segredo API</label>
+            <input type="password" id="apiSecret" placeholder="Digite seu segredo..." name="chave_secreta">
+        </div>
+      </div>
+
+      <input type="submit" value="Salvar" class="salvar">
+    </form>
+  </div>
+
+</body>
+</html>

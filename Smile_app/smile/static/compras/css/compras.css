@@ -1,0 +1,93 @@
+    :root {
+        --primary-blue: #1a237e;
+        --secondary-blue: #1976d2;
+        --light-blue: #bbdefb;
+        --success-green: #4caf50;
+        --danger-red: #f44336;
+    }
+    
+    body {
+        background-color: #f5f9ff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .dashboard-header {
+        background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        border: none;
+    }
+    
+    .card-header {
+        background-color: var(--secondary-blue);
+        color: white;
+        font-weight: bold;
+        border-radius: 10px 10px 0 0 !important;
+    }
+    
+    .table-responsive {
+        border-radius: 0 0 10px 10px;
+    }
+    
+    .table th {
+        background-color: var(--light-blue);
+    }
+    
+    .positive {
+        color: var(--success-green);
+        font-weight: bold;
+    }
+    
+    .negative {
+        color: var(--danger-red);
+        font-weight: bold;
+    }
+    
+    .stat-card {
+        text-align: center;
+        padding: 1.5rem;
+        border-radius: 10px;
+        color: white;
+        margin-bottom: 1rem;
+    }
+    
+    .stat-card.gains {
+        background: linear-gradient(135deg, #2e7d32, #4caf50);
+    }
+    
+    .stat-card.losses {
+        background: linear-gradient(135deg, #c62828, #f44336);
+    }
+    
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+    .navbar-brand-custom {
+        background-color: #ff7a59; 
+        color: white !important;
+        padding: 6px 12px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    .navbar .nav-link {
+        font-weight: 500;
+        color: #333;
+    }
+    .navbar .btn-outline-custom {
+        border-color: #007bff;
+        color: #007bff;
+    }
+    .navbar .btn-outline-custom:hover {
+        background-color: #007bff;
+        color: white;
+    }

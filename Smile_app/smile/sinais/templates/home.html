@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smile Crypto Trading</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0E0E0E] text-white">
+  <!-- Header -->
+  <header class="flex justify-between items-center px-10 py-6 bg-[#0E0E0E] border-b border-gray-800">
+    <h1 class="text-2xl font-bold text-[#D4A31F]">Smile</h1>
+    <nav class="space-x-6">
+       <a href="{% url 'chave' %}" class="hover:text-[#D4A31F]">API</a>
+      <a href="{% url 'dashboard' %}" class="hover:text-[#D4A31F]">Dashboard</a>
+      <a href="{% url 'editar_conta' %}" class="hover:text-[#D4A31F]">Editar Conta</a>
+      
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col items-center justify-center text-center py-20 px-6">
+    <h2 class="text-5xl font-extrabold">
+      <span class="text-[#D4A31F]">Smile</span> Crypto Trading
+    </h2>
+    <p class="mt-6 text-lg text-gray-300 max-w-2xl">
+      Negocie criptomoedas com confiança. Plataforma profissional,
+      segura e intuitiva para todos os níveis de traders.
+    </p>
+    <div class="mt-8 flex space-x-4">
+      <button class="bg-[#D4A31F] text-black px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition">
+        Iniciar Trading →
+      </button>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="grid md:grid-cols-3 gap-8 px-10 py-20 bg-[#121212]">
+    <div class="text-center p-6 bg-[#1a1a1a] rounded-xl shadow-lg">
+      <div class="text-[#D4A31F] text-3xl mb-4">📊</div>
+      <h3 class="text-xl font-bold">Trading Avançado</h3>
+      <p class="text-gray-400 mt-2">Ferramentas profissionais para análise técnica.</p>
+    </div>
+    <div class="text-center p-6 bg-[#1a1a1a] rounded-xl shadow-lg">
+      <div class="text-[#D4A31F] text-3xl mb-4">🛡️</div>
+      <h3 class="text-xl font-bold">100% Seguro</h3>
+      <p class="text-gray-400 mt-2">Segurança de nível bancário para seus ativos.</p>
+    </div>
+    <div class="text-center p-6 bg-[#1a1a1a] rounded-xl shadow-lg">
+      <div class="text-[#D4A31F] text-3xl mb-4">⚡</div>
+      <h3 class="text-xl font-bold">Execução Rápida</h3>
+      <p class="text-gray-400 mt-2">Latência ultra-baixa para trades precisos.</p>
+    </div>
+  </section>
+</body>
+</html>

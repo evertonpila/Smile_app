@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class HistoricalSignal(models.Model):
     symbol = models.CharField(max_length=50)
@@ -88,3 +89,12 @@ class TradeShort(models.Model):
 
     def __str__(self):
         return f"{self.symbol} - {self.type} short trade"
+
+
+class CredenciaisAPI(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    chave_api = models.CharField(max_length=255, blank=True, null=True)
+    chave_secreta = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f"Credenciais de {self.user.username}"

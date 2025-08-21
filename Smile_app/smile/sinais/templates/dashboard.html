@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Trading</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS customizado -->
+    <link rel="stylesheet" href="{% static 'sinais/css/dashboard.css' %}">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <style>
+        :root {
+    --gold: #D4A31F;
+    --dark-bg: #0e0e0e;
+    --card-bg: #1a1a1a;
+    --text-light: #f5f5f5;
+    --text-muted: #b3b3b3;
+    --success: #2ecc71;
+    --danger: #e74c3c;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid rgba(212, 163, 31, 0.3);
+}
+
+.navbar .nav-link {
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+.navbar .nav-link:hover {
+    color: var(--gold);
+}
+
+/* Header */
+.dashboard-header {
+    text-align: center;
+    margin: 2rem 0;
+}
+.dashboard-header h1 {
+    color: var(--gold);
+    font-weight: bold;
+}
+.dashboard-header p {
+    color: var(--text-muted);
+}
+
+/* Cards */
+.stat-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 15px rgba(212, 163, 31, 0.2);
+    transition: transform 0.2s ease;
+}
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-cardPositivo {
+    color: var(--success);
+    font-size: 3rem;
+}
+.stat-cardNegativo {
+    color: var(--danger);
+    font-size: 3rem;
+}
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold);
+}
+
+/* Tabelas */
+.card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(212, 163, 31, 0.2);
+}
+
+.card-header {
+    background: transparent;
+    color: var(--gold);
+    font-weight: bold;
+}
+
+.table {
+    color: var(--text-light);
+}
+.table thead {
+    color: var(--gold);
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(212, 163, 31, 0.1);
+}
+
+.positive {
+    color: var(--success);
+    font-weight: bold;
+}
+.negative {
+    color: var(--danger);
+    font-weight: bold;
+}
+
+/* Botão estilo premium */
+.btn-outline-primary {
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    transition: 0.3s ease;
+}
+.btn-outline-primary:hover {
+    background-color: var(--gold);
+    color: var(--dark-bg);
+}
+.smile {
+  text-decoration: none;
+  color: var(--gold);
+  font-size: 2rem;
+}
+
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a href="{% url 'home' %}" class="smile"> 
+                Smile
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCorporate" aria-controls="navbarNavCorporate" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNavCorporate">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 px-lg-4">
+            
+                      
+                </ul>
+                
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login'%}">Log in</a>
+                    </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'chave' %}">API</a>
+                    </li>
+                    <li class="nav-item">
+                         <a  class="nav-link" href="{% url 'editar_conta' %}" >Editar Conta</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main class="container-fluid mt-4">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-chart-line"></i> Dashboard de Trading</h1>
+            <p class="lead">Bem-vindo, {{ user.username }}! Aqui está o resumo da sua performance.</p>
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="stat-card gains">
+                    <h3 class="stat-cardPositivo">Ganhos</h3>
+                    <div class="stat-value">{{ stats.0.1|floatformat:2 }}%</div>
+                    <p>{{ stats.0.2 }} trades positivos</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="stat-card losses">
+                    <h3 class="stat-cardNegativo">Perdas</h3>
+                    <div class="stat-value">{{ stats.1.1|floatformat:2 }}%</div>
+                    <p>{{ stats.1.2 }} trades negativos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Últimos trades vencedores -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-trophy"></i> Últimos Trades Vencedores</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ativo</th>
+                            <th>Preço</th>
+                            <th>Sinal</th>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Sinal ID</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for trade in winning_trades %}
+                        <tr>
+                            <td>{{ trade.0 }}</td>
+                            <td>${{ trade.1|floatformat:4 }}</td>
+                            <td>{{ trade.2 }}</td>
+                            <td>{{ trade.3|date:"d/m/Y H:i" }}</td>
+                            <td>{{ trade.4 }}</td>
+                            <td>{{ trade.5 }}</td>
+                            <td class="positive">+{{ trade.6|floatformat:2 }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Últimos trades perdedores -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Últimos Trades Perdedores</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ativo</th>
+                            <th>Preço</th>
+                            <th>Sinal</th>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Sinal ID</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for trade in losing_trades %}
+                        <tr>
+                            <td>{{ trade.0 }}</td>
+                            <td>${{ trade.1|floatformat:4 }}</td>
+                            <td>{{ trade.2 }}</td>
+                            <td>{{ trade.3|date:"d/m/Y H:i" }}</td>
+                            <td>{{ trade.4 }}</td>
+                            <td>{{ trade.5 }}</td>
+                            <td class="negative">{{ trade.6|floatformat:2 }}%</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Chart.js (para gráficos futuros) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Dashboard carregado!');
+        });
+    </script>
+</body>
+</html>
